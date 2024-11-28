@@ -7,11 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Auctions.Data;
 using Auctions.Models;
+using Auctions.Service;
 
 namespace Auctions.Controllers
 {
     public class ListingsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly IListingsService _listingsService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ListingsController(IListingsService listingsService, IWebHostEnvironment webHostEnvironment)
+        {
+            _listingsService = listingsService;
+            _webHostEnvironment = webHostEnvironment;
+        }
       
 
         // GET: Listings
@@ -154,6 +164,5 @@ namespace Auctions.Controllers
         //private bool ListingExists(int id)
         //{
         //    return _context.Listing.Any(e => e.Id == id);
-        }
     }
 }
